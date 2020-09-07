@@ -1,29 +1,47 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "./card";
 import { arrayCharacter, key, order } from "../utils/characters";
+import { changeCard } from "../utils/changeCard";
 
 const GridStyle = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 130px);
-  grid-template-rows: repeat(4, 160px);
+  grid-template-columns: repeat(6, 100px);
+  grid-template-rows: repeat(5, 120px);
   row-gap: 30px;
   column-gap: 30px;
   justify-items: center;
+  align-content: center;
+  .changeImage {
+    background-image: url("https://indiehoy.com/wp-content/uploads/2020/07/rick-morty.jpg");
+  }
 `;
 
 const Grid = () => {
   const [image, setMyImg] = useState([]);
+  const [reviewCard, setReviewCard] = useState([]);
+  const [refernece, setReference] = useState([]);
+
+  const handleCheck = (infoCard, inReview) => {
+    changeCard(
+      infoCard,
+      inReview,
+      reviewCard,
+      refernece,
+      setReference,
+      setReviewCard
+    );
+  };
 
   const callApi = async () => {
-    const characters = arrayCharacter();
+    const characters = arrayCharacter(15);
     const response = await fetch(
       `https://rickandmortyapi.com/api/character/${characters}`
     );
     const data = await response.json();
-    const join = await order(data);
+    const join = await order(data, 29);
     const arrayKeys = key(join);
     const arrayData = [];
     for (let index = 0; index < join.length; index++) {
@@ -39,13 +57,19 @@ const Grid = () => {
   };
 
   useEffect(() => {
-    console.log("hola");
     callApi();
   }, []);
+
   return (
     <GridStyle>
       {image.map(({ key, id, img }) => (
-        <Card key={key} image={img} idCard={id} keyCard={key} />
+        <Card
+          reviewCard={handleCheck}
+          key={key}
+          image={img}
+          idCard={id}
+          keyCard={key}
+        />
       ))}
     </GridStyle>
   );

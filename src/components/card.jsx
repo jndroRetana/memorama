@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
+import { changeCard } from "../utils/changeCard";
 export const Turn = keyframes`
   from{
     transform: rotateY(0deg);
@@ -12,25 +12,36 @@ export const Turn = keyframes`
 `;
 
 const CardStyle = styled.div`
-  width: 130px;
-  height: 160px;
+  width: 100px;
+  height: 120px;
   background-color: red;
   background-image: url(${(props) => props.image});
   background-position: center;
   background-size: cover;
 `;
 
-const Card = ({ image, idCard, keyCard }) => {
-  const [myClic, setMyClic] = useState([]);
+const Card = ({ image, idCard, keyCard, reviewCard }) => {
+  const [changeImage, setChangeImage] = useState("changeImage");
+  const inReview = useRef();
 
-  const handleClick = () => {
-    const list = [];
-    list.push({ id: idCard, key: keyCard });
-    myClic.push(list);
-    console.log(myClic);
+  useEffect(() => {
+    localStorage.removeItem("clicCard");
+  }, []);
+
+  const handleClick = (inReview) => {
+    //changeCard(idCard, keyCard, setChangeImage, myFocus, setMyFocus);
+    localStorage.setItem("infoCard", [idCard, keyCard]);
+    reviewCard(localStorage.getItem("infoCard").split(","), inReview);
   };
 
-  return <CardStyle image={image} onClick={handleClick} myClic={myClic} />;
+  return (
+    <CardStyle
+      ref={inReview}
+      className={changeImage}
+      image={image}
+      onClick={() => handleClick(inReview)}
+    />
+  );
 };
 
 export default Card;

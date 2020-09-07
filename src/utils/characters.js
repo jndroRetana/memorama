@@ -3,9 +3,9 @@ const randomNum = (max, min) => {
   return num;
 };
 
-export const arrayCharacter = () => {
+export const arrayCharacter = (numCards) => {
   const myArray = [];
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < numCards; index++) {
     myArray.push(randomNum(591, 1));
   }
 
@@ -20,12 +20,12 @@ export const key = (array) => {
   return keys;
 };
 
-export const order = (array) => {
+export const order = (array, numCards) => {
   const origin = array;
   const newArray = array.concat([]);
   for (let index = 0; index < array.length; index++) {
     const element = origin[index];
-    newArray.splice(randomNum(9, 0), 0, element);
+    newArray.splice(randomNum(numCards, 0), 0, element);
   }
   return newArray;
 };
