@@ -12,9 +12,8 @@ export const Turn = keyframes`
 `;
 
 const CardStyle = styled.div`
-  width: 100px;
-  height: 120px;
-  background-color: red;
+  width: 110px;
+  height: 140px;
   background-image: url(${(props) => props.image});
   background-position: center;
   background-size: cover;

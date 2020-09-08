@@ -1,10 +1,32 @@
+import React from "react";
+import ReactDOM from "react-dom";
+
+import Grid from "../components/grid";
+
+const tick = () => {
+  const element = <Grid />;
+  ReactDOM.render(element, document.getElementById("__next"));
+};
+
+const newRender = (count, setCount) => {
+  if (count === 15) {
+    setCount(1);
+    setInterval(tick, 1000);
+  } else {
+    setCount(count + 1);
+  }
+  console.log(count);
+};
+
 export const changeCard = (
   infoCard,
   inReview,
   reviewCard,
   refernece,
   setReference,
-  setReviewCard
+  setReviewCard,
+  count,
+  setCount
 ) => {
   if (inReview.current.classList[2] !== "good") {
     //Guardar id y key para comparar tarjetas
@@ -23,6 +45,7 @@ export const changeCard = (
         refernece.forEach((ref) => {
           ref.classList.add("good");
         });
+        newRender(count, setCount);
         setReference([]);
         setReviewCard([]);
       } else {
@@ -32,7 +55,7 @@ export const changeCard = (
           });
           setReference([]);
           setReviewCard([]);
-        }, 1500);
+        }, 1300);
       }
       setReviewCard([]);
     }

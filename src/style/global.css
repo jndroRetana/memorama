@@ -11,7 +11,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("https://sinsal92.files.wordpress.com/2017/01/rick-morty-3.jpg");
+  /*"https://sinsal92.files.wordpress.com/2017/01/rick-morty-3.jpg"*/
+  background-image: url("https://popnerdtv.com/wp-content/uploads/2016/11/rick-and-morty.png");
   background-position: center;
   background-size: cover;
 }

@@ -15,7 +15,7 @@ const GridStyle = styled.div`
   justify-items: center;
   align-content: center;
   .changeImage {
-    background-image: url("https://indiehoy.com/wp-content/uploads/2020/07/rick-morty.jpg");
+    background-image: url("https://pm1.narvii.com/6608/b3c292545e2509d23892ceaf6fb778aa2d9f88f7_hq.jpg");
   }
 `;
 
@@ -23,7 +23,7 @@ const Grid = () => {
   const [image, setMyImg] = useState([]);
   const [reviewCard, setReviewCard] = useState([]);
   const [refernece, setReference] = useState([]);
-
+  const [count, setCount] = useState(1);
   const handleCheck = (infoCard, inReview) => {
     changeCard(
       infoCard,
@@ -31,7 +31,9 @@ const Grid = () => {
       reviewCard,
       refernece,
       setReference,
-      setReviewCard
+      setReviewCard,
+      count,
+      setCount
     );
   };
 
